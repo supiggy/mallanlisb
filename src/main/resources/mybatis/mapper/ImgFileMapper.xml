@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.suncaper.mallanli.mapper.ImgFileMapper">
+  <resultMap id="BaseResultMap" type="net.suncaper.mallanli.common.domain.ImgFile">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="bookId" jdbcType="INTEGER" property="bookid" />
+    <result column="saveName" jdbcType="VARCHAR" property="savename" />
+    <result column="originalName" jdbcType="VARCHAR" property="originalname" />
+    <result column="contentType" jdbcType="VARCHAR" property="contenttype" />
+    <result column="path" jdbcType="INTEGER" property="path" />
+    <result column="size" jdbcType="BIGINT" property="size" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, bookId, saveName, originalName, contentType, path, size, createTime, remark
+  </sql>
+  <select id="selectByExample" parameterType="net.suncaper.mallanli.common.domain.ImgFileExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from imgfile
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from imgfile
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from imgfile
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="net.suncaper.mallanli.common.domain.ImgFileExample">
+    delete from imgfile
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="net.suncaper.mallanli.common.domain.ImgFile">
+    insert into imgfile (id, bookId, saveName, 
+      originalName, contentType, path, 
+      size, createTime, remark
+      )
+    values (#{id,jdbcType=INTEGER}, #{bookid,jdbcType=INTEGER}, #{savename,jdbcType=VARCHAR}, 
+      #{originalname,jdbcType=VARCHAR}, #{contenttype,jdbcType=VARCHAR}, #{path,jdbcType=INTEGER}, 
+      #{size,jdbcType=BIGINT}, #{createtime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="net.suncaper.mallanli.common.domain.ImgFile">
+    insert into imgfile
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="bookid != null">
+        bookId,
+      </if>
+      <if test="savename != null">
+        saveName,
+      </if>
+      <if test="originalname != null">
+        originalName,
+      </if>
+      <if test="contenttype != null">
+        contentType,
+      </if>
+      <if test="path != null">
+        path,
+      </if>
+      <if test="size != null">
+        size,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="bookid != null">
+        #{bookid,jdbcType=INTEGER},
+      </if>
+      <if test="savename != null">
+        #{savename,jdbcType=VARCHAR},
+      </if>
+      <if test="originalname != null">
+        #{originalname,jdbcType=VARCHAR},
+      </if>
+      <if test="contenttype != null">
+        #{contenttype,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        #{path,jdbcType=INTEGER},
+      </if>
+      <if test="size != null">
+        #{size,jdbcType=BIGINT},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="net.suncaper.mallanli.common.domain.ImgFileExample" resultType="java.lang.Long">
+    select count(*) from imgfile
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update imgfile
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.bookid != null">
+        bookId = #{record.bookid,jdbcType=INTEGER},
+      </if>
+      <if test="record.savename != null">
+        saveName = #{record.savename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.originalname != null">
+        originalName = #{record.originalname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contenttype != null">
+        contentType = #{record.contenttype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.path != null">
+        path = #{record.path,jdbcType=INTEGER},
+      </if>
+      <if test="record.size != null">
+        size = #{record.size,jdbcType=BIGINT},
+      </if>
+      <if test="record.createtime != null">
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update imgfile
+    set id = #{record.id,jdbcType=INTEGER},
+      bookId = #{record.bookid,jdbcType=INTEGER},
+      saveName = #{record.savename,jdbcType=VARCHAR},
+      originalName = #{record.originalname,jdbcType=VARCHAR},
+      contentType = #{record.contenttype,jdbcType=VARCHAR},
+      path = #{record.path,jdbcType=INTEGER},
+      size = #{record.size,jdbcType=BIGINT},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="net.suncaper.mallanli.common.domain.ImgFile">
+    update imgfile
+    <set>
+      <if test="bookid != null">
+        bookId = #{bookid,jdbcType=INTEGER},
+      </if>
+      <if test="savename != null">
+        saveName = #{savename,jdbcType=VARCHAR},
+      </if>
+      <if test="originalname != null">
+        originalName = #{originalname,jdbcType=VARCHAR},
+      </if>
+      <if test="contenttype != null">
+        contentType = #{contenttype,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        path = #{path,jdbcType=INTEGER},
+      </if>
+      <if test="size != null">
+        size = #{size,jdbcType=BIGINT},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="net.suncaper.mallanli.common.domain.ImgFile">
+    update imgfile
+    set bookId = #{bookid,jdbcType=INTEGER},
+      saveName = #{savename,jdbcType=VARCHAR},
+      originalName = #{originalname,jdbcType=VARCHAR},
+      contentType = #{contenttype,jdbcType=VARCHAR},
+      path = #{path,jdbcType=INTEGER},
+      size = #{size,jdbcType=BIGINT},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

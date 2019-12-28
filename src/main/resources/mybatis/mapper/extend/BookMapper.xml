@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.suncaper.mallanli.mapper.extend.BookMapperExtend">
+  <insert id="insertBatch">
+    insert into book (id, name, price,
+      author, creatorId, remark
+      )
+    values
+    <foreach collection="books" item="book"  separator="," >
+      (#{book.id}, #{book.name}, #{book.price},    #{book.author}, #{book.creatorid}, #{book.remark}  )
+    </foreach>
+  </insert>
+</mapper>
